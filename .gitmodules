@@ -1,0 +1,3 @@
+[submodule "nvapi"]
+	path = nvapi
+	url = ../private-libraries/nvapi.git
