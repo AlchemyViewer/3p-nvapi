@@ -7,3 +7,4 @@ variables:
   AUTOBUILD_PACKAGE_NAME: nvapi
   AUTOBUILD_PACKAGE_BASE_DIR: autobuild-internal
   AUTOBUILD_PACKAGE_DIR: nvapi
+  NO_LNX: 1
