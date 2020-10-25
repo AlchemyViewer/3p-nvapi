@@ -31,8 +31,9 @@ source_environment_tempfile="$stage/source_environment.sh"
 . "$source_environment_tempfile"
 
 NVAPI_VERSION="450.0.0"
-NVAPI_ARCHIVE="$NVAPI_VERSION-developer.zip"
-NVAPI_SOURCE_DIR="$NVAPI_VERSION-developer"
+NVAPI_FILE_VERSION="R450"
+NVAPI_ARCHIVE="$NVAPI_FILE_VERSION-developer.zip"
+NVAPI_SOURCE_DIR="$NVAPI_FILE_VERSION-developer"
 
 build=${AUTOBUILD_BUILD_ID:=0}
 
