@@ -1,10 +1,12 @@
 include:
   - project: 'alchemy/infrastructure/gitlab-ci-config'
-    file: '3p-library-build.yml'
+    file: '3p-library.yml'
 
 variables:
   GIT_SUBMODULE_STRATEGY: recursive
-  AUTOBUILD_PACKAGE_NAME: nvapi
-  AUTOBUILD_PACKAGE_BASE_DIR: autobuild-internal
-  AUTOBUILD_PACKAGE_DIR: nvapi
-  NO_LNX: 1
+  BUILD_COMMON: 0
+  BUILD_WINDOWS: 1
+  BUILD_WINDOWS64: 1
+  BUILD_LINUX64: 0
+  BUILD_MACOS: 0
+

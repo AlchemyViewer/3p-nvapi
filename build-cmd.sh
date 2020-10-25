@@ -30,13 +30,13 @@ source_environment_tempfile="$stage/source_environment.sh"
 "$autobuild" source_environment > "$source_environment_tempfile"
 . "$source_environment_tempfile"
 
-NVAPI_VERSION="R450"
+NVAPI_VERSION="450.0.0"
 NVAPI_ARCHIVE="$NVAPI_VERSION-developer.zip"
 NVAPI_SOURCE_DIR="$NVAPI_VERSION-developer"
 
 build=${AUTOBUILD_BUILD_ID:=0}
 
-echo "${NVAPI_VERSION}.${build}" > "${stage}/VERSION.txt"
+echo "${NVAPI_VERSION}" > "${stage}/VERSION.txt"
 
 cp "nvapi/$NVAPI_ARCHIVE" .
 
