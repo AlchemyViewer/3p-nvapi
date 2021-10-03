@@ -30,8 +30,8 @@ source_environment_tempfile="$stage/source_environment.sh"
 "$autobuild" source_environment > "$source_environment_tempfile"
 . "$source_environment_tempfile"
 
-NVAPI_VERSION="450.0.0"
-NVAPI_FILE_VERSION="R450"
+NVAPI_VERSION="470.0.0"
+NVAPI_FILE_VERSION="R470"
 NVAPI_ARCHIVE="$NVAPI_FILE_VERSION-developer.zip"
 NVAPI_SOURCE_DIR="$NVAPI_FILE_VERSION-developer"
 
