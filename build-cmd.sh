@@ -1,65 +1,52 @@
-#!/usr/bin/env bash
+#!/bin/bash
 
-cd "$(dirname "$0")"
+cd "$(dirname "$0")" 
 
 # turn on verbose debugging output for parabuild logs.
-exec 4>&1; export BASH_XTRACEFD=4; set -x
+set -x
 # make errors fatal
 set -e
 # complain about unset env variables
 set -u
 
+# Check autobuild is around or fail
 if [ -z "$AUTOBUILD" ] ; then 
-    exit 1
+    fail0
 fi
-
 if [ "$OSTYPE" = "cygwin" ] ; then
     autobuild="$(cygpath -u $AUTOBUILD)"
 else
     autobuild="$AUTOBUILD"
 fi
 
+# Load autobuild provided shell functions and variables
+set +x
+eval "$("$autobuild" source_environment)"
+set -x
+
+# set LL_BUILD and friends ... moot since we're not building anything
+#set_build_variables convenience Release
+
+NVAPI_ROOT_NAME="nvapi"
+
 top="$(pwd)"
 stage="$(pwd)/stage"
-stage_release="$stage/lib/release"
+mkdir -p "$stage"
 
-mkdir -p $stage
+pushd "$NVAPI_ROOT_NAME"
+    mkdir -p "$stage/include/nvapi"
+    mkdir -p "$stage/LICENSES"
+    mkdir -p "$stage/lib/release"
 
-# Load autobuild provided shell functions and variables
-source_environment_tempfile="$stage/source_environment.sh"
-"$autobuild" source_environment > "$source_environment_tempfile"
-. "$source_environment_tempfile"
-
-NVAPI_VERSION="535.0.0"
-NVAPI_FILE_VERSION="R535"
-NVAPI_ARCHIVE="$NVAPI_FILE_VERSION-developer.zip"
-NVAPI_SOURCE_DIR="$NVAPI_FILE_VERSION-developer"
-
-build=${AUTOBUILD_BUILD_ID:=0}
-
-echo "${NVAPI_VERSION}" > "${stage}/VERSION.txt"
-
-cp "nvapi/$NVAPI_ARCHIVE" .
-
-unzip "$NVAPI_ARCHIVE"
-
-# Create the staging folders
-mkdir -p $stage/{LICENSES,lib/release,include/nvapi}
-
-pushd "$NVAPI_SOURCE_DIR"
     case "$AUTOBUILD_PLATFORM" in
-        "windows")
-            cp "x86/nvapi.lib" "$stage_release"
-        ;;
-        "windows64")
-            cp "amd64/nvapi64.lib" "$stage_release"
+
+        windows*)
+            cp "amd64/nvapi64.lib" "$stage/lib/release/nvapi.lib"
+
+            cp *.h "$stage/include/nvapi/"
+            cp *.c "$stage/include/nvapi/"
+
+            cp "License.txt" "$stage/LICENSES/nvapi.txt"
         ;;
     esac
-
-    # Copy the headers
-	cp -a *.h "$stage/include/nvapi"
 popd
-
-# Copy License
-cp -a nvapi.txt $stage/LICENSES/
-

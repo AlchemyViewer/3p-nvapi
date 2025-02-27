@@ -3,10 +3,14 @@
 <map>
     <key>package_description</key>
     <map>
+      <key>canonical_repo</key>
+      <string>https://github.com/AlchemyViewer/3p-nvapi</string>
       <key>copyright</key>
-      <string>Copyright (c) 2007- 2020 NVIDIA Corporation. All rights reserved. </string>
+      <string>Copyright (c) 2024 NVIDIA CORPORATION and AFFILIATES. All rights reserved.</string>
+      <key>description</key>
+      <string>NVAPI provides an interface to NVIDIA devices.</string>
       <key>license</key>
-      <string>nvapi</string>
+      <string>MIT</string>
       <key>license_file</key>
       <string>LICENSES/nvapi.txt</string>
       <key>name</key>
@@ -15,6 +19,8 @@
       <map>
         <key>common</key>
         <map>
+          <key>build_directory</key>
+          <string>nvapi</string>
           <key>configurations</key>
           <map>
             <key>default</key>
@@ -29,15 +35,16 @@
                 <string>bash</string>
               </map>
               <key>default</key>
-              <boolean>true</boolean>
+              <string>true</string>
               <key>name</key>
               <string>default</string>
             </map>
           </map>
           <key>manifest</key>
           <array>
-            <string>include/*</string>
-            <string>LICENSES/nvapi.txt</string>
+            <string>include/nvapi</string>
+            <string>lib/release</string>
+            <string>LICENSES</string>
           </array>
           <key>name</key>
           <string>common</string>
@@ -56,16 +63,12 @@
               <string>default</string>
             </map>
           </map>
-          <key>manifest</key>
-          <array>
-            <string>lib/release/*.lib</string>
-          </array>
           <key>name</key>
           <string>windows</string>
         </map>
       </map>
-      <key>version_file</key>
-      <string>VERSION.txt</string>
+      <key>use_scm_version</key>
+      <boolean>true</boolean>
     </map>
     <key>type</key>
     <string>autobuild</string>
