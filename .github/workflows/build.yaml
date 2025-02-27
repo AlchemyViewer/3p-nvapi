@@ -17,5 +17,3 @@ jobs:
     if: startsWith(github.ref, 'refs/tags/v')
     steps:
       - uses: AlchemyViewer/action-autobuild-release@v4
-        with:
-          public: false
